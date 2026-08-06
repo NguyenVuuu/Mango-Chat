@@ -81,7 +81,7 @@ const MessageInput = ({ selectedConver }: { selectedConver: Conversation }) => {
         } else {
           // Find sender name from participants
           const sender = selectedConver.participants.find(
-            (p) => p._id === getSenderId(replyingTo.senderId)
+            (p) => p._id === getSenderId(replyingTo.senderId),
           );
           replyToSenderName = sender?.displayName;
         }
@@ -96,7 +96,7 @@ const MessageInput = ({ selectedConver }: { selectedConver: Conversation }) => {
           imgUrl,
           replyingTo?._id,
           replyingTo?.content || undefined,
-          replyToSenderName
+          replyToSenderName,
         );
       } else {
         await sendGroupMessage(
@@ -105,7 +105,7 @@ const MessageInput = ({ selectedConver }: { selectedConver: Conversation }) => {
           imgUrl,
           replyingTo?._id,
           replyingTo?.content || undefined,
-          replyToSenderName
+          replyToSenderName,
         );
       }
       // Clear reply and image after sending
@@ -170,7 +170,7 @@ const MessageInput = ({ selectedConver }: { selectedConver: Conversation }) => {
         >
           <ImagePlus className="size-5" />
         </Button>
-        
+
         <input
           ref={fileInputRef}
           type="file"
@@ -178,7 +178,7 @@ const MessageInput = ({ selectedConver }: { selectedConver: Conversation }) => {
           hidden
           onChange={handleImageSelect}
         />
-        
+
         <div className="flex-1 relative">
           <Input
             onKeyPress={handleKeyPress}
@@ -202,7 +202,7 @@ const MessageInput = ({ selectedConver }: { selectedConver: Conversation }) => {
             </Button>
           </div>
         </div>
-        
+
         <Button
           onClick={sendMessage}
           className="bg-gradient-chat hover:shadow-glow transition-all duration-200 hover:scale-105 shrink-0 rounded-full size-10 p-0"

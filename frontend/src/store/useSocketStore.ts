@@ -100,20 +100,30 @@ export const useSocketStore = create<SocketState>((set, get) => ({
     });
 
     // message pinned
-    socket.on("message-pinned", ({ conversationId, pinnedMessages, systemMessage }) => {
-      useChatStore.getState().updatePinnedMessages(conversationId, pinnedMessages);
-      if (systemMessage) {
-        useChatStore.getState().addMessage(systemMessage);
-      }
-    });
+    socket.on(
+      "message-pinned",
+      ({ conversationId, pinnedMessages, systemMessage }) => {
+        useChatStore
+          .getState()
+          .updatePinnedMessages(conversationId, pinnedMessages);
+        if (systemMessage) {
+          useChatStore.getState().addMessage(systemMessage);
+        }
+      },
+    );
 
     // message unpinned
-    socket.on("message-unpinned", ({ conversationId, pinnedMessages, systemMessage }) => {
-      useChatStore.getState().updatePinnedMessages(conversationId, pinnedMessages);
-      if (systemMessage) {
-        useChatStore.getState().addMessage(systemMessage);
-      }
-    });
+    socket.on(
+      "message-unpinned",
+      ({ conversationId, pinnedMessages, systemMessage }) => {
+        useChatStore
+          .getState()
+          .updatePinnedMessages(conversationId, pinnedMessages);
+        if (systemMessage) {
+          useChatStore.getState().addMessage(systemMessage);
+        }
+      },
+    );
   },
   disconnectSocket: () => {
     const socket = get().socket;
