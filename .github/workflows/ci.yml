@@ -8,6 +8,7 @@ on:
 
 jobs:
   backend:
+    if: hashFiles('backend/package-lock.json') != ''
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -19,7 +20,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
           cache-dependency-path: backend/package-lock.json
 
@@ -33,6 +34,7 @@ jobs:
         run: docker build -t jwt-backend ./backend
 
   frontend:
+    if: hashFiles('frontend/package-lock.json') != ''
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -44,7 +46,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
           cache-dependency-path: frontend/package-lock.json
 
