@@ -42,3 +42,26 @@ The GitHub Actions workflow performs three checks:
 1. Backend install and syntax/build validation
 2. Frontend lint and production build
 3. Docker image builds for both services
+
+## How to test CI on a feature branch
+
+Use this flow when you want to verify CI before merging into `develop`:
+
+1. Create a feature branch from `develop`.
+2. Make your change on the feature branch.
+3. Commit and push the branch to GitHub.
+4. Open a pull request from `feature/...` into `develop`.
+5. Wait for GitHub Actions to finish.
+6. Fix any CI failure on the same feature branch and push again.
+7. Merge only when the PR is green.
+
+## Branch flow
+
+Use this branch strategy:
+
+1. Create feature branches from `develop`.
+2. Open a pull request from `feature/...` into `develop`.
+3. Merge only after CI passes.
+4. When `develop` is stable, open a pull request from `develop` into `master`.
+5. Merge to `master` only after CI passes again.
+6. CD/deploy runs only on `master`.
