@@ -42,12 +42,3 @@ The GitHub Actions workflow performs three checks:
 1. Backend install and syntax/build validation
 2. Frontend lint and production build
 3. Docker image builds for both services
-
-## Suggested CV description
-
-You can describe this project as a:
-
-- Dockerized real-time chat application with MongoDB and Socket.IO
-- Nginx-reverse-proxied frontend/backend stack
-- CI-validated multi-stage build pipeline using GitHub Actions
-- Production-ready deployment target for container platforms
