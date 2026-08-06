@@ -2,6 +2,17 @@
 
 This repository is packaged as a DevOps-ready full stack project for a CV or portfolio.
 
+## Live Demo
+
+Production app: https://mango-chat-green.vercel.app/
+
+Demo accounts:
+
+- Username: `user1`
+	- Password: `123123`
+- Username: `user2`
+	- Password: `123456`
+
 ## Stack
 
 - Backend: Node.js, Express, Socket.IO, MongoDB
