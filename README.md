@@ -42,3 +42,14 @@ The GitHub Actions workflow performs three checks:
 1. Backend install and syntax/build validation
 2. Frontend lint and production build
 3. Docker image builds for both services
+
+## Branch flow
+
+Use this branch strategy:
+
+1. Create feature branches from `develop`.
+2. Open a pull request from `feature/...` into `develop`.
+3. Merge only after CI passes.
+4. When `develop` is stable, open a pull request from `develop` into `master`.
+5. Merge to `master` only after CI passes again.
+6. CD/deploy runs only on `master`.
