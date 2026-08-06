@@ -51,7 +51,7 @@ const MessageOptionsModal = ({
   const { user } = useAuthStore();
   const isOwn = isOwnMessage(message.senderId, user?._id);
   const isPinned = pinnedMessages.some(
-    (pinned) => pinned.messageId === message._id
+    (pinned) => pinned.messageId === message._id,
   );
 
   return (

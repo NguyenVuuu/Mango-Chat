@@ -33,7 +33,7 @@ const NewGroupChatModal = () => {
     (fr) =>
       fr.displayName.toLowerCase().includes(search.toLowerCase()) &&
       //dam bao khong hien nhung nguoi da dc moi
-      !invitedUsers.some((u) => u._id === fr._id)
+      !invitedUsers.some((u) => u._id === fr._id),
   );
 
   const handleGetFriends = async () => {
@@ -59,7 +59,7 @@ const NewGroupChatModal = () => {
       await createConversation(
         "group",
         groupName,
-        invitedUsers.map((u) => u._id)
+        invitedUsers.map((u) => u._id),
       );
       //dong dialog
       closeButtonRef.current?.click();
@@ -70,7 +70,7 @@ const NewGroupChatModal = () => {
       toast.success("Nhóm chat đã được tạo thành công!");
     } catch {
       toast.error(
-        "Đã có lỗi xảy ra khi tạo nhóm chat trong new group chat modal."
+        "Đã có lỗi xảy ra khi tạo nhóm chat trong new group chat modal.",
       );
     }
   };

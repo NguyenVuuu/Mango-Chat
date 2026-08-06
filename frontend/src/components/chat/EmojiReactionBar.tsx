@@ -73,4 +73,3 @@ const EmojiReactionBar = ({
 };
 
 export default EmojiReactionBar;
-

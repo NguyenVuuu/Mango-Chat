@@ -54,11 +54,11 @@ const isSystemMessage = (message: Message): boolean => {
     "đã thay đổi ảnh nhóm",
     "đã rời nhóm",
     "đã thêm thành viên",
-    "đã xóa thành viên"
+    "đã xóa thành viên",
   ];
 
-  return systemKeywords.some(keyword =>
-    message.content?.toLowerCase().includes(keyword.toLowerCase())
+  return systemKeywords.some((keyword) =>
+    message.content?.toLowerCase().includes(keyword.toLowerCase()),
   );
 };
 
@@ -66,7 +66,11 @@ const formatTimeDivider = (date: Date, prevDate?: Date): string => {
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   const yesterday = new Date(today.getTime() - 24 * 60 * 60 * 1000);
-  const messageDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  const messageDate = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate(),
+  );
 
   // Nếu khác ngày với tin nhắn trước
   if (prevDate && !isSameDay(date, prevDate)) {
@@ -99,7 +103,7 @@ const formatTimeDivider = (date: Date, prevDate?: Date): string => {
 const shouldShowTimeDivider = (
   currentMessage: Message,
   prevMessage: Message | undefined,
-  isFirstMessage: boolean
+  isFirstMessage: boolean,
 ): boolean => {
   // Quy tắc 1: Tin nhắn đầu tiên của cuộc trò chuyện
   if (isFirstMessage) {
@@ -125,7 +129,8 @@ const shouldShowTimeDivider = (
 
   // Quy tắc 3: Nếu cùng ngày nhưng khoảng cách thời gian ≥ 10 phút
   const timeDiff = currentDate.getTime() - prevDate.getTime();
-  if (timeDiff >= 10 * 60 * 1000) { // 10 phút = 600000ms
+  if (timeDiff >= 10 * 60 * 1000) {
+    // 10 phút = 600000ms
     return true;
   }
 
@@ -152,14 +157,20 @@ const MessageItem = ({
   // Logic mới để xác định có hiển thị mốc thời gian hay không
   // Trong mảng đã reverse: index 0 = tin nhắn mới nhất, index cao hơn = tin nhắn cũ hơn
   // Tin nhắn trước đó (tin nhắn cũ hơn) để so sánh
-  const prevMessage = index + 1 < messages.length ? messages[index + 1] : undefined;
+  const prevMessage =
+    index + 1 < messages.length ? messages[index + 1] : undefined;
   const isFirstMessage = index === messages.length - 1; // Tin nhắn đầu tiên (cũ nhất)
 
   // Áp dụng logic mới để quyết định hiển thị mốc thời gian
-  const shouldShowTime = shouldShowTimeDivider(message, prevMessage, isFirstMessage);
+  const shouldShowTime = shouldShowTimeDivider(
+    message,
+    prevMessage,
+    isFirstMessage,
+  );
 
   // Ngắt nhóm tin nhắn nếu hiển thị thời gian hoặc người gửi khác nhau với tin nhắn trước
-  const isGroupBreak = shouldShowTime || message.senderId !== prevMessage?.senderId;
+  const isGroupBreak =
+    shouldShowTime || message.senderId !== prevMessage?.senderId;
 
   const participant = selectedConver.participants.find(
     (p) => p._id.toString() === getSenderId(message.senderId),
@@ -256,10 +267,7 @@ const MessageItem = ({
   // Handle system messages
   if (message.messageType === "system") {
     return (
-      <SystemMessage 
-        message={message} 
-        senderName={participant?.displayName}
-      />
+      <SystemMessage message={message} senderName={participant?.displayName} />
     );
   }
 
@@ -269,7 +277,10 @@ const MessageItem = ({
       {shouldShowTime && (
         <div className="flex justify-center my-4">
           <span className="text-xs text-muted-foreground bg-background px-3 py-1 rounded-full border border-border/50">
-            {formatTimeDivider(new Date(message.createdAt), prevMessage ? new Date(prevMessage.createdAt) : undefined)}
+            {formatTimeDivider(
+              new Date(message.createdAt),
+              prevMessage ? new Date(prevMessage.createdAt) : undefined,
+            )}
           </span>
         </div>
       )}
@@ -304,9 +315,7 @@ const MessageItem = ({
             <Card
               className={cn(
                 "p-3 shadow-sm",
-                isOwn
-                  ? "chat-bubble-sent border-0"
-                  : "chat-bubble-received",
+                isOwn ? "chat-bubble-sent border-0" : "chat-bubble-received",
                 message.isRecalled && "opacity-60",
               )}
             >

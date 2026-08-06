@@ -33,7 +33,7 @@ const DirrectMessageCard = ({ conver }: { conver: Conversation }) => {
   const unreadCount = conver.unreadCounts[user._id];
   const lastMessage = conver.lastMessage?.isRecalled
     ? "Tin nhắn đã được thu hồi"
-    : conver.lastMessage?.content ?? "";
+    : (conver.lastMessage?.content ?? "");
 
   const handleSelectConversation = async (id: string) => {
     setActiveConversation(id);
@@ -77,7 +77,7 @@ const DirrectMessageCard = ({ conver }: { conver: Conversation }) => {
               "text-sm truncate",
               unreadCount > 0
                 ? "font-medium text-foreground"
-                : "text-muted-foreground"
+                : "text-muted-foreground",
             )}
           >
             {lastMessage}
