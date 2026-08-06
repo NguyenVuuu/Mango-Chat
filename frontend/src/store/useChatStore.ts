@@ -43,7 +43,7 @@ export const useChatStore = create<ChatState>()(
         } catch (error) {
           console.error(
             "useChatStore: loi xay ra khi fetchConversations: ",
-            error
+            error,
           );
           set({ converLoading: false });
         }
@@ -68,7 +68,7 @@ export const useChatStore = create<ChatState>()(
         try {
           const { messages: fetched, cursor } = await chatService.fetchMessages(
             converId,
-            nextCursor
+            nextCursor,
           );
 
           //luu mang tin nhan sau khi xu ly
@@ -81,7 +81,10 @@ export const useChatStore = create<ChatState>()(
             //lay danh sach tin nhan cu
             const prev = state.messages[converId]?.items ?? [];
             //merge tin nhan cu va tin nhan moi
-            const merged = prev.length > 0 ? [...normalizedFetched, ...prev] : normalizedFetched;
+            const merged =
+              prev.length > 0
+                ? [...normalizedFetched, ...prev]
+                : normalizedFetched;
 
             return {
               messages: {
@@ -106,7 +109,7 @@ export const useChatStore = create<ChatState>()(
         imgUrl,
         replyToId,
         replyToContent,
-        replyToSenderName
+        replyToSenderName,
       ) => {
         try {
           const { activeConversationId } = get();
@@ -117,11 +120,11 @@ export const useChatStore = create<ChatState>()(
             activeConversationId || undefined,
             replyToId,
             replyToContent,
-            replyToSenderName
+            replyToSenderName,
           );
           set((state) => ({
             conversations: state.conversations.map((c) =>
-              c._id === activeConversationId ? { ...c, seenBy: [] } : c
+              c._id === activeConversationId ? { ...c, seenBy: [] } : c,
             ),
           }));
         } catch (error) {
@@ -134,7 +137,7 @@ export const useChatStore = create<ChatState>()(
         imgUrl,
         replyToId,
         replyToContent,
-        replyToSenderName
+        replyToSenderName,
       ) => {
         try {
           await chatService.sendGroupMessage(
@@ -143,11 +146,11 @@ export const useChatStore = create<ChatState>()(
             imgUrl,
             replyToId,
             replyToContent,
-            replyToSenderName
+            replyToSenderName,
           );
           set((state) => ({
             conversations: state.conversations.map((c) =>
-              c._id === get().activeConversationId ? { ...c, seenBy: [] } : c
+              c._id === get().activeConversationId ? { ...c, seenBy: [] } : c,
             ),
           }));
         } catch (error) {
@@ -197,7 +200,7 @@ export const useChatStore = create<ChatState>()(
       updateConversation: (conversation) => {
         set((state) => ({
           conversations: state.conversations.map((c) =>
-            c._id === conversation._id ? { ...c, ...conversation } : c
+            c._id === conversation._id ? { ...c, ...conversation } : c,
           ),
         }));
       },
@@ -210,7 +213,7 @@ export const useChatStore = create<ChatState>()(
           }
           //tim cuoc hoi thoai hien tai
           const conver = conversations.find(
-            (c) => c._id === activeConversationId
+            (c) => c._id === activeConversationId,
           );
 
           if (!conver) {
@@ -232,7 +235,7 @@ export const useChatStore = create<ChatState>()(
                       [user._id]: 0,
                     },
                   }
-                : c
+                : c,
             ),
           }));
         } catch (error) {
@@ -243,7 +246,7 @@ export const useChatStore = create<ChatState>()(
       addConversation(conversation) {
         set((state) => {
           const exists = state.conversations.some(
-            (c) => c._id.toString() === conversation._id.toString()
+            (c) => c._id.toString() === conversation._id.toString(),
           );
           return {
             conversations: exists
@@ -260,7 +263,7 @@ export const useChatStore = create<ChatState>()(
           const conversation = await chatService.createConversation(
             type,
             name,
-            memberIds
+            memberIds,
           );
 
           get().addConversation(conversation);
@@ -271,7 +274,7 @@ export const useChatStore = create<ChatState>()(
         } catch (error) {
           console.error(
             "useChatStore: loi xay ra khi tao conversation:",
-            error
+            error,
           );
         } finally {
           set({ loading: false });
@@ -325,7 +328,7 @@ export const useChatStore = create<ChatState>()(
       updateMessageRecalled: (
         messageId: string,
         isRecalled: boolean,
-        recalledAt: string
+        recalledAt: string,
       ) => {
         set((state) => {
           const updatedMessages = { ...state.messages };
@@ -405,7 +408,7 @@ export const useChatStore = create<ChatState>()(
       updatePinnedMessages: (conversationId: string, pinnedMessages: any[]) => {
         set((state) => ({
           conversations: state.conversations.map((c) =>
-            c._id === conversationId ? { ...c, pinnedMessages } : c
+            c._id === conversationId ? { ...c, pinnedMessages } : c,
           ),
         }));
       },
@@ -416,6 +419,6 @@ export const useChatStore = create<ChatState>()(
       partialize: (state) => ({
         conversations: state.conversations,
       }),
-    }
-  )
+    },
+  ),
 );

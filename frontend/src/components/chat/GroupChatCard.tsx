@@ -24,7 +24,7 @@ const GroupChatCard = ({ conver }: { conver: Conversation }) => {
   const name = conver.group?.name ?? "";
   const lastMessage = conver.lastMessage?.isRecalled
     ? "Tin nhắn đã được thu hồi"
-    : conver.lastMessage?.content ?? "";
+    : (conver.lastMessage?.content ?? "");
 
   const handleSelectConversation = async (id: string) => {
     setActiveConversation(id);

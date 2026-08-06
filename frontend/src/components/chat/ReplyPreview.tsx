@@ -28,7 +28,7 @@ const ReplyPreview = ({
     senderName = "";
   } else {
     const sender = selectedConver?.participants.find(
-      (p) => p._id === getSenderId(message.senderId)
+      (p) => p._id === getSenderId(message.senderId),
     );
     senderName = sender?.displayName || "Unknown";
   }

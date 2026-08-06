@@ -62,7 +62,7 @@ export const useFriendStore = create<FriendState>((set) => ({
     } catch (error) {
       console.error(
         "useFriendStore: loi khi lay danh sach yeu cau ket ban",
-        error
+        error,
       );
     } finally {
       set({ loading: false });
